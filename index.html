@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DOS Horse Racing</title>
+<meta name="description" content="A pixel-art horse racing party game with local multiplayer betting. Coming soon to iOS and Android.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #12182B;
+    --panel-bg: #1B2440;
+    --white: #FFFFFF;
+    --dim: #9AA3B8;
+    --yellow: #FFFF55;
+    --orange: #CC7A33;
+    --red: #FF5555;
+    --border: rgba(255,255,255,0.9);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.025) 0px,
+      rgba(255,255,255,0.025) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    z-index: 1;
+  }
+
+  .display {
+    font-family: 'VT323', monospace;
+    letter-spacing: 0.02em;
+  }
+
+  a { color: var(--yellow); }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- HERO ---------- */
+
+  .hero {
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    padding: 40px 24px;
+  }
+
+  .hero-track {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+    background: var(--orange);
+    display: flex;
+  }
+  .hero-track span {
+    flex: 1;
+    border-right: 1px solid rgba(0,0,0,0.25);
+  }
+
+  .eyebrow {
+    color: var(--dim);
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+
+  .boot-line {
+    font-family: 'VT323', monospace;
+    font-size: clamp(44px, 11vw, 88px);
+    line-height: 1;
+    color: var(--yellow);
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 3px solid var(--yellow);
+    width: 0;
+    animation:
+      type 1.6s steps(17, end) forwards,
+      caret 0.85s step-end infinite;
+  }
+
+  @keyframes type {
+    from { width: 0; }
+    to { width: 17ch; }
+  }
+  @keyframes caret {
+    50% { border-color: transparent; }
+  }
+
+  .tagline {
+    margin-top: 22px;
+    font-size: 18px;
+    color: var(--white);
+    max-width: 520px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease-out 1.7s forwards;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .mature-notice {
+    margin-top: 34px;
+    font-size: 12.5px;
+    color: var(--dim);
+    max-width: 460px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease-out 2s forwards;
+  }
+  .mature-notice strong { color: var(--red); }
+
+  /* ---------- SECTIONS ---------- */
+
+  section {
+    position: relative;
+    z-index: 2;
+    padding: 70px 0;
+  }
+
+  .section-heading {
+    font-family: 'VT323', monospace;
+    font-size: 34px;
+    color: var(--yellow);
+    letter-spacing: 0.02em;
+    margin-bottom: 26px;
+  }
+
+  .panel {
+    border: 2px solid var(--border);
+    background: var(--panel-bg);
+    padding: 28px 30px;
+  }
+
+  .panel + .panel {
+    margin-top: 20px;
+  }
+
+  p { margin-bottom: 14px; color: #DCE1EE; }
+  p:last-child { margin-bottom: 0; }
+
+  .lane-list {
+    list-style: none;
+    display: grid;
+    gap: 14px;
+    margin-top: 4px;
+  }
+  .lane-list li {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    border-left: 4px solid var(--orange);
+    padding-left: 14px;
+  }
+  .lane-list .num {
+    font-family: 'VT323', monospace;
+    font-size: 22px;
+    color: var(--yellow);
+    min-width: 26px;
+  }
+  .lane-list .body strong {
+    display: block;
+    color: var(--white);
+    font-size: 15px;
+    margin-bottom: 3px;
+  }
+  .lane-list .body span {
+    color: var(--dim);
+    font-size: 14px;
+  }
+
+  /* ---------- PRIVACY ---------- */
+
+  .privacy h3 {
+    font-family: 'VT323', monospace;
+    font-size: 22px;
+    color: var(--white);
+    margin: 22px 0 8px;
+  }
+  .privacy h3:first-child { margin-top: 0; }
+  .privacy .updated {
+    color: var(--dim);
+    font-size: 13px;
+    margin-bottom: 22px;
+  }
+  .privacy ul {
+    margin: 0 0 14px 20px;
+    color: #DCE1EE;
+  }
+  .privacy li { margin-bottom: 6px; }
+
+  /* ---------- FOOTER ---------- */
+
+  footer {
+    padding: 50px 0 70px;
+    text-align: center;
+    color: var(--dim);
+    font-size: 13px;
+    position: relative;
+    z-index: 2;
+  }
+  footer a { color: var(--dim); text-decoration: underline; }
+  footer .rule {
+    height: 2px;
+    background: var(--border);
+    max-width: 760px;
+    margin: 0 auto 40px;
+    opacity: 0.3;
+  }
+
+  @media (max-width: 560px) {
+    .boot-line { font-size: 13vw; }
+    section { padding: 50px 0; }
+    .panel { padding: 22px 20px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="hero-track" aria-hidden="true">
+      <span style="background:#3355DD"></span>
+      <span style="background:#FFD633"></span>
+      <span style="background:#CC7A33"></span>
+      <span style="background:#DD6622"></span>
+      <span style="background:#FF9933"></span>
+      <span style="background:#33AA33"></span>
+    </div>
+
+    <div class="eyebrow">TIMBUK-ALSO LLC PRESENTS</div>
+    <h1 class="boot-line">DOS HORSE RACING</h1>
+    <p class="tagline">A pixel-art racetrack in your pocket. Pick your horse, place your bet, and watch it come down to the wire — with friends, on one phone.</p>
+
+    <p class="mature-notice"><strong>Simulated gambling.</strong> Betting uses in-game virtual currency only — no real money is ever wagered or paid out. Not intended for players under 18.</p>
+  </div>
+
+  <div class="wrap">
+
+    <section id="about">
+      <h2 class="section-heading">WHAT IS THIS?</h2>
+      <div class="panel">
+        <p>DOS Horse Racing is a local, pass-the-phone party game built for game nights, not for playing alone. Up to six players share one device, each with their own bankroll, taking turns betting on races run by a field of pixel-art horses with names like "Spilled Milk" and "Witch's Brew."</p>
+        <p>Every race is genuinely unpredictable — favorites can stumble, longshots can surge, and every so often a jockey takes a comic tumble and the horse finishes the race riderless. Live commentary calls out real moments from the actual race as they happen, not scripted filler.</p>
+        <p>No accounts, no logins, no real money changes hands. Just a fast, silly race and a chance to talk trash about whoever bet on the horse that fell over.</p>
+      </div>
+    </section>
+
+    <section id="features">
+      <h2 class="section-heading">HOW IT PLAYS</h2>
+      <div class="panel">
+        <ul class="lane-list">
+          <li>
+            <span class="num">1</span>
+            <div class="body">
+              <strong>Everyone gets a bankroll</strong>
+              <span>Up to 6 players, each with their own starting balance and their own bets each race.</span>
+            </div>
+          </li>
+          <li>
+            <span class="num">2</span>
+            <div class="body">
+              <strong>Pick a horse, set a bet</strong>
+              <span>Win, place, show, exacta, or trifecta — tap-only betting, no typing required.</span>
+            </div>
+          </li>
+          <li>
+            <span class="num">3</span>
+            <div class="body">
+              <strong>Watch it actually play out</strong>
+              <span>Real odds-weighted racing with genuine lead changes, called live as they happen.</span>
+            </div>
+          </li>
+          <li>
+            <span class="num">4</span>
+            <div class="body">
+              <strong>Pass it to the next player</strong>
+              <span>Hand off the phone, run it back, and see who's still got a bankroll by the end of the night.</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="privacy" class="privacy">
+      <h2 class="section-heading">PRIVACY POLICY</h2>
+      <div class="panel">
+        <p class="updated">Last updated: August 2026</p>
+
+        <p>This policy covers the DOS Horse Racing mobile app, published by Timbuk-Also LLC ("we," "us"). It explains what information is collected when you use the app and why.</p>
+
+        <h3>What we don't collect</h3>
+        <p>DOS Horse Racing has no accounts, no login, and no way to identify you personally. We do not collect your name, email address, or any player names you type in — those exist only on your device, for that session, and are never sent anywhere.</p>
+
+        <h3>Advertising data (via Google AdMob)</h3>
+        <p>The app shows ads through Google AdMob, including an optional "watch an ad for bonus currency" feature. To do this, AdMob and its partners may collect:</p>
+        <ul>
+          <li>Advertising identifiers (like Apple's IDFA or Android's Advertising ID)</li>
+          <li>Device information (device type, operating system version)</li>
+          <li>Approximate location (derived from IP address)</li>
+          <li>Ad interaction data (which ads were shown, watched, or tapped)</li>
+        </ul>
+        <p>This data is collected and processed by Google, not by us directly. You can review how Google handles this data in <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>, and you can reset or limit your device's advertising identifier at any time in your phone's system settings.</p>
+
+        <h3>In-app purchases</h3>
+        <p>If the app offers a purchase (such as removing ads), that transaction is handled entirely by Apple's App Store or Google Play billing systems. We never see or store your payment information.</p>
+
+        <h3>Children's privacy</h3>
+        <p>DOS Horse Racing includes simulated gambling content and is rated for players 18 and older. It is not directed at children, and we do not knowingly collect information from anyone under 18.</p>
+
+        <h3>Your choices</h3>
+        <p>You can limit ad tracking through your device's privacy settings at any time (Settings → Privacy → Tracking on iOS, or Settings → Ads on Android). Doing so may result in less relevant ads but does not affect gameplay.</p>
+
+        <h3>Changes to this policy</h3>
+        <p>If this policy changes, the "Last updated" date above will change too. Continued use of the app after an update means you accept the revised policy.</p>
+
+        <h3>Contact</h3>
+        <p>Questions about this policy can be sent to <a href="mailto:shoptimbukalso@gmail.com">shoptimbukalso@gmail.com</a>.</p>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    <div class="rule"></div>
+    <div class="wrap">
+      <p>&copy; 2026 Timbuk-Also LLC. DOS Horse Racing is not affiliated with any real racetrack, sportsbook, or wagering service.</p>
+      <p style="margin-top:8px;">Questions? <a href="mailto:shoptimbukalso@gmail.com">shoptimbukalso@gmail.com</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>
