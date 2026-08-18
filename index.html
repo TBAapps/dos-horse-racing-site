@@ -5,6 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DOS Horse Racing</title>
 <meta name="description" content="A pixel-art horse racing party game with local multiplayer betting. Coming soon to iOS and Android.">
+
+<link rel="icon" type="image/x-icon" href="favicon/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon/android-chrome-192x192.png">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://timbukalso.com/">
+<meta property="og:title" content="DOS Horse Racing">
+<meta property="og:description" content="A pixel-art horse racing party game with local multiplayer betting. Coming soon to iOS and Android.">
+<meta property="og:image" content="https://timbukalso.com/social-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DOS Horse Racing">
+<meta name="twitter:description" content="A pixel-art horse racing party game with local multiplayer betting. Coming soon to iOS and Android.">
+<meta name="twitter:image" content="https://timbukalso.com/social-card.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=VT323&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -126,18 +146,58 @@
     animation: fadeUp 0.6s ease-out 1.7s forwards;
   }
 
+  .hero-horses {
+    display: flex;
+    align-items: flex-end;
+    margin-top: 28px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease-out 1.9s forwards;
+  }
+  .hero-horses img {
+    height: 88px;
+    width: auto;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+  .hero-horses .h2 { margin: 0 -14px; transform: translateY(8px); }
+  .hero-horses .h3 { transform: translateY(-3px); }
+
+  .status-badge {
+    margin-top: 26px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: 2px solid var(--border);
+    background: var(--panel-bg);
+    padding: 10px 18px;
+    font-family: 'VT323', monospace;
+    font-size: 20px;
+    color: var(--yellow);
+    opacity: 0;
+    animation: fadeUp 0.6s ease-out 2.1s forwards;
+  }
+  .status-badge .dot {
+    width: 8px;
+    height: 8px;
+    background: var(--yellow);
+    animation: blink 1.4s step-end infinite;
+  }
+
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
   }
+  @keyframes blink {
+    50% { opacity: 0.15; }
+  }
 
   .mature-notice {
-    margin-top: 34px;
+    margin-top: 30px;
     font-size: 12.5px;
     color: var(--dim);
     max-width: 460px;
     opacity: 0;
-    animation: fadeUp 0.6s ease-out 2s forwards;
+    animation: fadeUp 0.6s ease-out 2.3s forwards;
   }
   .mature-notice strong { color: var(--red); }
 
@@ -243,6 +303,9 @@
     .boot-line { font-size: 13vw; }
     section { padding: 50px 0; }
     .panel { padding: 22px 20px; }
+    .hero-horses img { height: 58px; }
+    .hero-horses .h2 { margin: 0 -8px; }
+    .status-badge { font-size: 15px; padding: 8px 12px; }
   }
 </style>
 </head>
@@ -261,6 +324,14 @@
     <div class="eyebrow">TIMBUK-ALSO LLC PRESENTS</div>
     <h1 class="boot-line">DOS HORSE RACING</h1>
     <p class="tagline">A pixel-art racetrack in your pocket. Pick your horse, place your bet, and watch it come down to the wire — with friends, on one phone.</p>
+
+    <div class="hero-horses">
+      <img src="images/horse-brown.png" alt="Pixel-art racehorse with green and white jockey silks" class="h1">
+      <img src="images/horse-gray.png" alt="Pixel-art racehorse with purple and white jockey silks" class="h2">
+      <img src="images/horse-white.png" alt="Pixel-art racehorse with blue and red jockey silks" class="h3">
+    </div>
+
+    <div class="status-badge"><span class="dot"></span> COMING SOON TO THE APP STORE</div>
 
     <p class="mature-notice"><strong>Simulated gambling.</strong> Betting uses in-game virtual currency only — no real money is ever wagered or paid out. Not intended for players under 18.</p>
   </div>
