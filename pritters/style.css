@@ -47,3 +47,7 @@ footer{border-top:1px solid var(--line);margin-top:30px;padding:34px 0 60px;text
 footer nav{display:flex;gap:20px;justify-content:center;margin-bottom:12px;font-weight:600}
 footer a{color:var(--dim)}
 @media(max-width:560px){
+.crew.all{grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:12px}
+.crew.all figure{background:#E5F7EC;border-color:rgba(255,255,255,.2);padding:12px 8px 8px}
+.crew.all img{max-width:96px;height:96px}
+.crew.all figcaption{color:#2F4A38;font-size:16px}
