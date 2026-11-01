@@ -1,0 +1,23 @@
+# Timbuk-Also LLC
+
+> Timbuk-Also LLC is a small independent studio that makes mobile games. Its main game is Pritters: Catch & Collect, a free cozy fishing and creature-collecting game for iPhone.
+
+## Pritters: Catch & Collect
+
+- Platform: iPhone (iOS). Price: free, with optional ads the player chooses to watch and optional in-app purchases.
+- App Store: https://apps.apple.com/app/id6822543541
+- Website: https://timbukalso.com/pritters/
+- What it is: You've moved to Fanwart Village, where everybody fishes, but what they catch are Pritters: twenty odd little water critters living in Fanwart Ponds. Each cast is a short timing game. Hitting more targets on the timing bar gives better odds at rarer Pritters (Common, Uncommon, Rare, Epic, Legendary).
+- Collecting: Every catch goes into your Collection. Catching all twenty unlocks secret forms, for 60 forms in all.
+- Trophies: Elder Harry, the village elder who guides new players, carves a wood, stone and gold trophy for each Pritter at 15, 25 and 35 catches. Trophies are shown in your trophy room.
+- Bait: Each cast costs one Bait Berry. Players earn bait by winning four mini games (Berry Match, Basket Catch, Image Shuffle, Memory Match) or by watching an optional ad. Tackle Boxes are optional bait packs.
+- Power-ups: Casting charges a battery that awards power-ups such as wider targets and a slower marker. The Golden Lure is an optional purchase that guarantees a Pritter form you haven't caught yet.
+- Holidays: During Christmas week (December 18 to 25), some Pritters appear in Santa hats.
+- No account or sign-up. Progress is saved on the device. Playing works offline.
+- How to play, hints and tips: https://timbukalso.com/pritters/guide/
+- All 20 Pritters (one page each): https://timbukalso.com/pritters/collection/
+- 2027 event schedule: https://timbukalso.com/pritters/events/
+- Press kit: https://timbukalso.com/pritters/press/
+- Support: https://timbukalso.com/pritters/support/
+- Privacy policy: https://timbukalso.com/pritters/privacy/
+- Contact: admin@timbukalso.com
