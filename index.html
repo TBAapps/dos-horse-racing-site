@@ -260,6 +260,37 @@
     font-size: 14px;
   }
 
+  /* ---------- MORE GAMES ---------- */
+
+  .more-game {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+  }
+  .more-game img {
+    width: 88px;
+    height: 88px;
+    border-radius: 20px;
+    flex: none;
+  }
+  .more-game .name {
+    font-family: 'VT323', monospace;
+    font-size: 30px;
+    color: var(--yellow);
+    line-height: 1.1;
+  }
+  .more-game .go {
+    display: inline-block;
+    margin-top: 10px;
+    color: var(--yellow);
+    text-decoration: underline;
+  }
+  @media (max-width: 560px) {
+    .more-game { flex-direction: column; text-align: center; }
+  }
+
   /* ---------- PRIVACY ---------- */
 
   .privacy h3 {
@@ -383,6 +414,20 @@
       </div>
     </section>
 
+    <section id="more-games">
+      <h2 class="section-heading">ALSO FROM TIMBUK-ALSO</h2>
+      <div class="panel">
+        <a class="more-game" href="/pritters/">
+          <img src="/pritters/images/app-icon-176.png" alt="Pritters app icon" width="88" height="88" loading="lazy">
+          <div>
+            <div class="name">Pritters: Catch &amp; Collect</div>
+            <p>A cozy fishing and creature-collecting game for iPhone. Cast your line into Fanwart Ponds, catch odd little critters called Pritters, and win trophies carved by Elder Harry. Free to play.</p>
+            <span class="go">Visit the Pritters site</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
     <section id="privacy" class="privacy">
       <h2 class="section-heading">PRIVACY POLICY</h2>
       <div class="panel">
@@ -427,6 +472,7 @@
     <div class="wrap">
       <p>&copy; 2026 Timbuk-Also LLC. DOS Horse Racing is not affiliated with any real racetrack, sportsbook, or wagering service.</p>
       <p style="margin-top:8px;">Questions? <a href="mailto:admin@timbukalso.com">admin@timbukalso.com</a></p>
+      <p style="margin-top:8px;">More from us: <a href="/pritters/">Pritters: Catch &amp; Collect</a></p>
     </div>
   </footer>
 
